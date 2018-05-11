@@ -1,0 +1,20 @@
+storage: ./storage
+auth:
+  htpasswd:
+    file: ./htpasswd
+uplinks:
+  npmjs:
+    url: https://registry.npmjs.org/
+packages:
+  '@kdfse-fe/*':
+    access: $all
+    publish: $authenticated
+    proxy: npmjs
+  '**':
+    proxy: npmjs
+logs:
+  - {type: stdout, format: pretty, level: http}
+https:
+  key: /run/secrets/ssl-key
+  cert: /run/secrets/ssl-cert
+  ca: /run/secrets/ssl-csr

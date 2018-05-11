@@ -1,0 +1,32 @@
+version: '3.6'
+
+services:
+  package_registry:
+    secrets:
+      - ssl-key
+      - ssl-cert
+      - ssl-csr
+    configs:
+      - source: verdaccio
+        target: /verdaccio/conf/config.yaml
+  app:
+    secrets:
+      - ssl-key
+      - ssl-cert
+      - ssl-dhparam
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 2s
+secrets:
+  ssl-key:
+    external: true
+  ssl-cert:
+    external: true
+  ssl-dhparam:
+    external: true
+  ssl-csr:
+    external: true
+configs:
+  verdaccio:
+    external: true

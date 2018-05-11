@@ -1,0 +1,7 @@
+version: '3.6'
+
+services:
+  node-dev:
+    build:
+      context: .
+    image: pubcore/node-prod:1.0.0

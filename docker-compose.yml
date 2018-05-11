@@ -1,0 +1,31 @@
+version: '3.6'
+
+services:
+  app:
+    image: pubcore/node-dev:1.0.0
+    ports:
+      - "8443:8443"
+      - "9229:9229"
+    environment:
+      APP_PORT: 8443
+    logging:
+      driver: json-file
+      options:
+        mode: non-blocking
+        max-buffer-size: '4m'
+    depends_on:
+      - package_registry
+    volumes:
+      - type: bind
+        source: .
+        target: /home/node/app
+  package_registry:
+    image: verdaccio/verdaccio:2.7
+    ports:
+      - "4873:4873"
+    volumes:
+      - type: volume
+        source: verdaccio
+        target: /verdaccio/storage
+volumes:
+  verdaccio:

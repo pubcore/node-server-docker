@@ -1,0 +1,28 @@
+{
+  "name": "@pubcore/node-server-docker",
+  "version": "1.0.0",
+  "description": "node server composed with docker",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "compression": "^1.7.2",
+    "express": "^4.16.3",
+    "helmet": "^3.12.0",
+    "morgan": "^1.9.0"
+  },
+  "engines": {
+    "npm": ">=8.11.1"
+  },
+  "devDependencies": {},
+  "keywords": [
+    "nodejs",
+    "docker",
+    "node",
+    "server"
+  ]
+}
