@@ -33,7 +33,7 @@ Register keys and certificates created for your domain you are running your (loc
 #### 9. start server
 
 		docker swarm init
-		docker stack deploy -c docker-compose.yml -c d-compose-deploy.yml kdfs
+		docker stack deploy -c docker-compose.yml -c d-compose-deploy.yml web
 
 #### 10. test it
 
