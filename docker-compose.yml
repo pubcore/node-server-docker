@@ -27,5 +27,7 @@ services:
       - type: volume
         source: verdaccio
         target: /verdaccio/storage
+    environment:
+      PROTOCOL: https
 volumes:
   verdaccio:
