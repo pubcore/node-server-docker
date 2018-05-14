@@ -7,7 +7,11 @@
 #### 4. find/create ssl key- and certificate-files (ssl-files) for your local domain
 ... you need it for next step
 
-#### 5. register secrets
+#### 5. switch docker to swarm mode
+
+		docker swarm init
+
+#### 6. register secrets
 
 Create dhparam.pem file used below with (replace  &lt;pathToFile&gt; with directory where the ssl-files stored in:
 
@@ -20,21 +24,20 @@ Register keys and certificates created for your domain you are running your (loc
 		docker secret create ssl-csr <absolute path to ssl csr file>
 		docker secret create ssl-dhparam <absolute path to dh-strong.pem file>
 
-#### 6. change into project-dir
+#### 7. change into project-dir
 
-#### 7. register configs
+#### 8. register configs
 
 		docker config create verdaccio ./verdaccio-config.yml
 
-#### 8. install application packages
+#### 9. install application packages
 
 		npm install
 
-#### 9. start server
+#### 10. start server
 
-		docker swarm init
 		docker stack deploy -c docker-compose.yml -c d-compose-deploy.yml web
 
-#### 10. test it
+#### 11. test it
 
 		https://<your-local-domain>:8443/
