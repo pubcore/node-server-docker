@@ -4,6 +4,8 @@
 
 #### 2. change to your development folder, where you may have other projects and clone this repository into it (which will create the project-dir)
 
+		git clone git@github.com:pubcore/node-server-docker.git 		
+
 #### 4. find/create ssl key- and certificate-files (ssl-files) for your local domain
 ... you need it for next step
 
