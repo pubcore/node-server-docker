@@ -5,7 +5,8 @@ const
 	https = require('https'), //security: SSL
 	helmet = require('helmet'), //security: HTTP headers
 	morgan = require('morgan'), //ops: accesss logs
-	compression = require('compression') //performance: response compression
+	compression = require('compression'), //performance: response compression
+	service = require('./js/app.js') //dev: the application
 
 var {env} = process,
 	{APP_PORT} = env
@@ -30,7 +31,7 @@ app.use(morgan('common', {
 }))
 app.use(helmet())
 app.use(compression())
-app.get('/', (req, res) => res.send('Hello world!'))
+app.use(service())
 https.createServer(options, app).listen(
 	APP_PORT,
 	() => console.log('listening on port ' + APP_PORT)
