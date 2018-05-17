@@ -6,7 +6,7 @@ const
 	helmet = require('helmet'), //security: HTTP headers
 	morgan = require('morgan'), //ops: accesss logs
 	compression = require('compression'), //performance: response compression
-	service = require('./js/app.js') //dev: the application
+	service = require('./js/index.js') //dev: the application
 
 var {env} = process,
 	{APP_PORT} = env
