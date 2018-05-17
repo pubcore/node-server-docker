@@ -15,12 +15,10 @@
 
 		docker swarm init
 
-6. register secrets
-
+6. register secrets  
 Create dhparam.pem file used below with (replace  &lt;pathToFile&gt; with directory where the ssl-files stored in:
 
 		openssl dhparam -out <pathToFile>dh-strong.pem 2048
-
 Register keys and certificates created for your domain you are running your (local) development system
 
 		docker secret create ssl-key <absolute path to ssl key file>
