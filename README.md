@@ -1,4 +1,6 @@
-### Local developer's system installation
+## Create an ECMAScript (JavasScript) web server based on Node.js, express and docker
+
+### How to run/test this package, standalone on your local system
 
 #### 1. latest version of docker, node and npm installed and running
 
@@ -40,6 +42,6 @@ Register keys and certificates created for your domain you are running your (loc
 
 		docker stack deploy -c docker-compose.yml -c d-compose-deploy.yml web
 
-#### 11. test it
+#### 11. test it: you should see "Hello world!"
 
 		https://<your-local-domain>:8443/
