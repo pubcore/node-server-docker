@@ -2,8 +2,7 @@ FROM node:8.11.1-alpine
 
 ENV SERVICE_PORT 8443
 ENV APP_WORKDIR=/home/node/app
-
-RUN npm install -g nodemon
+ENV NODE_ENV=development
 
 RUN mkdir $APP_WORKDIR
 
@@ -14,4 +13,4 @@ WORKDIR $APP_WORKDIR
 EXPOSE $SERVICE_PORT
 EXPOSE 9229
 
-CMD ["nodemon", "-L", "--inspect=0.0.0.0:9229", "--trace-sync-io", "server.js"]
+CMD ["node", "--inspect=0.0.0.0:9229", "--trace-sync-io", "server.js"]

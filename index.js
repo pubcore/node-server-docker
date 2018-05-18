@@ -8,11 +8,15 @@ const
 	compression = require('compression') //performance: response compression
 
 var {env} = process,
-	{APP_PORT} = env
+	{APP_PORT, NODE_ENV} = env
 
 if(!APP_PORT){
 	throw new TypeError('undefined APP_PORT')
 }
+if(!NODE_ENV){
+	throw new TypeError('undefined NODE_ENV')
+}
+console.log('node environment is ' + NODE_ENV)
 
 //leverage docker's "secrets"
 const options = {
