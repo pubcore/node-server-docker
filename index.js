@@ -1,6 +1,5 @@
 'use strict'
-const
-	fs = require('fs'), //dev: helper
+const fs = require('fs'), //dev: helper
 	express = require('express'), //dev: http server
 	https = require('https'), //security: SSL
 	helmet = require('helmet'), //security: HTTP headers
@@ -10,24 +9,20 @@ const
 var {env} = process,
 	{APP_PORT, NODE_ENV} = env
 
-if(!APP_PORT){
-	throw new TypeError('undefined APP_PORT')
-}
-if(!NODE_ENV){
-	throw new TypeError('undefined NODE_ENV')
-}
+if(!APP_PORT) throw new TypeError('undefined APP_PORT')
+if(!NODE_ENV) throw new TypeError('undefined NODE_ENV')
 console.log('node environment is ' + NODE_ENV)
 
 //leverage docker's "secrets"
 const options = {
-  key: fs.readFileSync('/run/secrets/ssl-key'),
-  cert: fs.readFileSync('/run/secrets/ssl-cert'),
-  dhparam: fs.readFileSync('/run/secrets/ssl-dhparam')
+	key: fs.readFileSync('/run/secrets/ssl-key'),
+	cert: fs.readFileSync('/run/secrets/ssl-cert'),
+	dhparam: fs.readFileSync('/run/secrets/ssl-dhparam')
 }
 
 const app = express()
 app.use(morgan('common', {
-    skip: (req, res) => res.statusCode < 400, stream: process.stderr
+	skip: (req, res) => res.statusCode < 400, stream: process.stderr
 }))
 app.use(morgan('common', {
 	skip: (req, res) => res.statusCode >= 400, stream: process.stdout
@@ -38,5 +33,4 @@ https.createServer(options, app).listen(
 	APP_PORT,
 	() => console.log('listening on port ' + APP_PORT)
 )
-
-module.exports = app
+module.exports = {express, app}
