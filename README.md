@@ -38,7 +38,7 @@ Register keys and certificates created for your domain you are running your (loc
 
 10. start server
 
-		docker stack deploy -c docker-compose.yml -c d-compose-deploy.yml web
+		npm run start
 
 11. test it: you should see "Hello world!"
 

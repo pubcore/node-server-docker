@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "docker stack deploy -c docker-compose.yml -c d-compose-deploy.yml web",
+    "stop": "docker stack rm web",
+    "restart-app": "docker service scale web_app=0 -d && docker service scale web_app=1 -d"
   },
   "author": "",
   "license": "MIT",
@@ -17,7 +19,8 @@
     "morgan": "^1.9.0"
   },
   "engines": {
-    "node": ">=8.11.1"
+    "node": ">=8.11.1",
+    "docker": ">=18.06.0"
   },
   "devDependencies": {},
   "keywords": [
