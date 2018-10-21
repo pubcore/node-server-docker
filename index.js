@@ -8,7 +8,7 @@ const fs = require('fs'), //dev: helper
 	RateLimit = require('express-rate-limit') //security: DOS and brute force protection
 
 var {env} = process,
-	{APP_PORT, NODE_ENV} = env
+	{APP_PORT, NODE_ENV, RATE_WIN, RATE_MAX, RATE_DELAY} = env
 
 if(!APP_PORT) throw new TypeError('undefined APP_PORT')
 if(!NODE_ENV) throw new TypeError('undefined NODE_ENV')
@@ -21,9 +21,9 @@ const options = {
 		dhparam: fs.readFileSync('/run/secrets/ssl-dhparam')
 	},
 	rateLimiter = new RateLimit({
-		windowMs: 5*60*1000, // 5 minutes
-		max: 300, // limit each IP to # requests per windowMs
-		delayMs: 0 // disable delaying - full speed until the max limit is reached
+		windowMs: RATE_WIN || 5*60*1000, // 5 minutes
+		max: RATE_MAX || 300, // limit each IP to # requests per windowMs
+		delayMs: RATE_DELAY || 0 // disable delaying - full speed until the max limit is reached
 	})
 
 

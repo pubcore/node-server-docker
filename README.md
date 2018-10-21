@@ -43,3 +43,12 @@ Register keys and certificates created for your domain you are running your (loc
 11. test it: you should see "Hello world!"
 
 		https://<your-local-domain>:8443/
+
+### Configuration environment variables
+* APP_PORT  
+Application's ports
+* NODE_ENV  
+Type of environment, either 'development' or 'production'
+* RATE_WIN, RATE_MAX, RATE_DELAY  
+Rate limit values, see https://www.npmjs.com/package/express-rate-limit  
+Default values (Window: 5 min, Max: 300, Delay: 0)
