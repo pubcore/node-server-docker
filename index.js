@@ -26,7 +26,6 @@ const options = {
 		delayMs: RATE_DELAY || 0 // disable delaying - full speed until the max limit is reached
 	})
 
-
 const app = express()
 app.use(morgan('common', {
 	skip: (req, res) => res.statusCode < 400, stream: process.stderr
@@ -38,6 +37,7 @@ app.enable('trust proxy')
 app.use(rateLimiter)
 app.use(helmet())
 app.use(compression())
+app.use(express.static('htdocs'))
 https.createServer(options, app).listen(
 	APP_PORT,
 	() => console.log('listening on port ' + APP_PORT)
