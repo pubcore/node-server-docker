@@ -52,6 +52,3 @@ Type of environment, either 'development' or 'production'
 * RATE_WIN, RATE_MAX, RATE_DELAY  
 Rate limit values, see https://www.npmjs.com/package/express-rate-limit  
 Default values (Window: 5 min, Max: 300, Delay: 0)
-
-## Static files
-Static files can be placed into "htdocs" directory (relative to server.js file). Build process must update/copy compent's files into this directory.
