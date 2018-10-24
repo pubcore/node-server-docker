@@ -1,6 +1,6 @@
 {
   "name": "@pubcore/node-server-docker",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "description": "node server composed with docker",
   "main": "index.js",
   "scripts": {
