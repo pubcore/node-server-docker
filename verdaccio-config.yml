@@ -17,4 +17,3 @@ logs:
 https:
   key: /run/secrets/ssl-key
   cert: /run/secrets/ssl-cert
-  ca: /run/secrets/ssl-csr

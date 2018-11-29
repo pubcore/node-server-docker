@@ -5,7 +5,6 @@ services:
     secrets:
       - ssl-key
       - ssl-cert
-      - ssl-csr
     configs:
       - source: verdaccio
         target: /verdaccio/conf/config.yaml
@@ -24,8 +23,6 @@ secrets:
   ssl-cert:
     external: true
   ssl-dhparam:
-    external: true
-  ssl-csr:
     external: true
 configs:
   verdaccio:

@@ -23,7 +23,6 @@ Register keys and certificates created for your domain you are running your (loc
 
 		docker secret create ssl-key <absolute path to ssl key file>
 		docker secret create ssl-cert <absolute path to ssl crt (certificate) file>
-		docker secret create ssl-csr <absolute path to ssl csr file>
 		docker secret create ssl-dhparam <absolute path to dh-strong.pem file>
 
 7. change into project-dir
