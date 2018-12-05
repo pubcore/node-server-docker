@@ -1,4 +1,4 @@
-FROM node:8.11.1-alpine
+FROM node:10.14.1-alpine
 
 ENV SERVICE_PORT 8443
 ENV APP_WORKDIR=/home/node/app

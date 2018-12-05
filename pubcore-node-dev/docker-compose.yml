@@ -4,4 +4,4 @@ services:
   node-dev:
     build:
       context: .
-    image: pubcore/node-dev:1.0.0
+    image: pubcore/node-dev:1.0.1
