@@ -12,10 +12,10 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "compression": "^1.7.3",
-    "express": "^4.16.4",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
     "express-rate-limit": "^2.14.2",
-    "helmet": "^3.14.0",
+    "helmet": "^3.21.1",
     "morgan": "^1.9.1"
   },
   "engines": {
