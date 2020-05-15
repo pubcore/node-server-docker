@@ -4,10 +4,10 @@
   "description": "node server composed with docker",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "docker stack deploy -c docker-compose.yml -c d-compose-deploy.yml web",
-    "stop": "docker stack rm web",
-    "restart-app": "docker service scale web_app=0 -d && docker service scale web_app=1 -d"
+    "test": "NODE_ENV=development TLS_KEY_DIR=. mocha",
+    "build": "docker-compose build",
+    "start": "docker-compose up",
+    "stop": "docker-compose down"
   },
   "author": "",
   "license": "MIT",
@@ -15,8 +15,9 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "express-rate-limit": "^2.14.2",
-    "helmet": "^3.21.1",
-    "morgan": "^1.9.1"
+    "helmet": "^3.22.0",
+    "morgan": "^1.10.0",
+    "toobusy-js": "^0.5.1"
   },
   "engines": {
     "node": ">=8.11.1",

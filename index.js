@@ -29,6 +29,18 @@ const options = {
 	})
 
 const app = express()
+if(TOOBUSY_ENABLED){
+	toobusy = require('toobusy-js') //availability
+	toobusy.maxLag(TOOBUSY_MAX_LAT || 300)
+	toobusy.interval(TOOBUSY_INTERVALL || 1500)
+	app.use((req, res, next) => {
+	  if (toobusy()) {
+	    res.send(503, 'Service currently unavailable');
+	  } else {
+	    next()
+	  }
+	})
+}
 app.use(morgan('common', {
 	skip: (req, res) => res.statusCode < 400, stream: process.stderr
 }))
