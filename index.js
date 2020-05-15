@@ -8,17 +8,19 @@ const fs = require('fs'), //dev: helper
 	RateLimit = require('express-rate-limit') //security: DOS and brute force protection
 
 var {env} = process,
-	{APP_PORT, NODE_ENV, RATE_WIN, RATE_MAX, RATE_DELAY} = env
+	{APP_PORT, NODE_ENV, RATE_WIN, RATE_MAX, RATE_DELAY, TLS_KEY_DIR,
+	TOOBUSY_ENABLED, TOOBUSY_MAX_LAT, TOOBUSY_INTERVALL} = env,
+	tlsKeyDir = TLS_KEY_DIR || '/run/secrets',
+	port = APP_PORT || 0 //auto select next free port if set to 0
 
-if(!APP_PORT) throw new TypeError('undefined APP_PORT')
 if(!NODE_ENV) throw new TypeError('undefined NODE_ENV')
 console.log('node environment is ' + NODE_ENV)
 
-//leverage docker's "secrets"
+//leverage injections of secrets by bind-mounts or docker-secrets
 const options = {
-		key: fs.readFileSync('/run/secrets/ssl-key'),
-		cert: fs.readFileSync('/run/secrets/ssl-cert'),
-		dhparam: fs.readFileSync('/run/secrets/ssl-dhparam')
+		key: fs.readFileSync(`${tlsKeyDir}/ssl-key`, 'utf8'),
+		cert: fs.readFileSync(`${tlsKeyDir}/ssl-cert`, 'utf8'),
+		dhparam: fs.readFileSync(`${tlsKeyDir}/ssl-dhparam`, 'utf8')
 	},
 	rateLimiter = new RateLimit({
 		windowMs: RATE_WIN || 5*60*1000, // 5 minutes
