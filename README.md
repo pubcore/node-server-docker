@@ -1,53 +1,31 @@
-## Create an ECMAScript (JavasScript) web server based on Node.js, express and docker
+## Package to create an Node.js web server based on express and docker
+The package's purpose is to offer a foundation for express based web apps,
+with general, none functional behaviour regarding security, logging and
+performance beeing integrated.
 
-### How to run/test this package, standalone on your local system
+### install
+```
+npm i @pubcore/node-server-docker
+```
 
-1. latest version of docker, node and npm installed and running
+### Example
+```
+'use strict'
+const {app} = require('@pubcore/node-server-docker')
+app.use((req, res) => res.send('Hello world!'))
+```
 
-2. change to your development folder, where you may have other projects and clone this repository into it (which will create the project-dir)
-
-		git clone git@github.com:pubcore/node-server-docker.git 		
-
-4. find/create ssl key- and certificate-files (ssl-files) for your local domain
-... you need it for next step
-
-5. switch docker to swarm mode
-
-		docker swarm init
-
-6. register secrets  
-Create dhparam.pem file used below with (replace  &lt;pathToFile&gt; with directory where the ssl-files stored in:
-
-		openssl dhparam -out <pathToFile>dh-strong.pem 2048
-Register keys and certificates created for your domain you are running your (local) development system
-
-		docker secret create ssl-key <absolute path to ssl key file>
-		docker secret create ssl-cert <absolute path to ssl crt (certificate) file>
-		docker secret create ssl-dhparam <absolute path to dh-strong.pem file>
-
-7. change into project-dir
-
-8. register configs
-
-		docker config create verdaccio ./verdaccio-config.yml
-
-9. install application packages
-
-		npm install
-
-10. start server
-
-		npm run start
-
-11. test it: you should see "Hello world!"
-
-		https://<your-local-domain>:8443/
-
-### Configuration environment variables
-* APP_PORT  
+### Configuration environment variables with (default) value
+* APP_PORT (0)
 Application's ports
-* NODE_ENV  
+* NODE_ENV (production)
 Type of environment, either 'development' or 'production'
-* RATE_WIN, RATE_MAX, RATE_DELAY  
+* RATE_WIN (3000), RATE_MAX (300), RATE_DELAY (0)
 Rate limit values, see https://www.npmjs.com/package/express-rate-limit  
 Default values (Window: 5 min, Max: 300, Delay: 0)
+* TLS_KEY_DIR (/run/secrets)
+Path to the place where the TLS (SSL) key files for used domain are located.
+Required files: ssl-key, ssl-cert, ssl-dhparam
+* TOOBUSY_ENABLED (0), TOOBUSY_MAX_LAT (300), TOOBUSY_INTERVALL (1500)
+https://www.npmjs.com/package/toobusy-js
+
