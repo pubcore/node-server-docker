@@ -39,8 +39,8 @@ app.enable('trust proxy')
 app.use(rateLimiter)
 app.use(helmet())
 app.use(compression())
-https.createServer(options, app).listen(
-	APP_PORT,
-	() => console.log('listening on port ' + APP_PORT)
+var server = https.createServer(options, app).listen(
+	port,
+	() => console.log('listening on port ' + server.address().port)
 )
-module.exports = {express, app}
+module.exports = {express, app, server}
