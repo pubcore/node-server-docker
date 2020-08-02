@@ -27,8 +27,8 @@
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "dhparam": "^2.0.0",
-    "eslint": "^7.0.0",
-    "mocha": "^7.1.2",
+    "eslint": "^7.6.0",
+    "mocha": "^7.2.0",
     "selfsigned": "^1.10.7"
   },
   "keywords": [
