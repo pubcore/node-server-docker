@@ -21,11 +21,13 @@ Application's ports
 * NODE_ENV (production)
 Type of environment, either 'development' or 'production'
 * RATE_WIN (3000), RATE_MAX (300), RATE_DELAY (0)
-Rate limit values, see https://www.npmjs.com/package/express-rate-limit  
-Default values (Window: 5 min, Max: 300, Delay: 0)
+Rate limit values, see https://www.npmjs.com/package/express-rate-limit
 * TLS_KEY_DIR (/run/secrets)
 Path to the place where the TLS (SSL) key files for used domain are located.
 Required files: ssl-key, ssl-cert, ssl-dhparam
+* TLS_KEY_SOURCE (FILES)
+If set to "devcert", corresponding npm package is used to auto-generate a
+selfsigned certificated. Only in development mode possible (NODE_ENV == "development")
 * TOOBUSY_ENABLED (0), TOOBUSY_MAX_LAT (300), TOOBUSY_INTERVALL (1500)
 https://www.npmjs.com/package/toobusy-js
-
+* HTTP (false) If set to "true" TLS is disabled (not recommended)

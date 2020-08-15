@@ -14,12 +14,62 @@ fs.readFileSync = (file, ...args) => ({
   './ssl-cert':certs.cert,
   './ssl-dhparam':dhparam})[file] || readFileSync(file, ...args)
 
-const {app, server} = require('../index')
+var app, server, env = {...process.env}
+const setup = args => () => {
+    setEnv(args)
+    ;({app, server} = require('../index'))
+  },
+  cleanup = () => {
+    process.env = {...env}
+    server.close()
+    delete require.cache[require.resolve('../index')]
+  },
+  setEnv = args => process.env = {...env, ...args}
 
-describe('base node server', () => {
-  it('exports express app', async () => {
-    var response = await chai.request(app).get('/').send()
-    expect(response).to.have.status(404)
+describe('server', () => {
+  describe('with default config', () => {
+    before(() => {
+      setEnv({TLS_KEY_DIR:'.', NODE_ENV:'development'})
+      ;({app, server} = require('../index'))
+    })
+    it('serves 404 with default config', async () => {
+      var response = await chai.request(app).get('/').send()
+      expect(response).to.have.status(404)
+    })
+    after(cleanup)
   })
-  after(() => server.close())
+  describe('create TLS keys by "devcert"', () => {
+    describe('correct environment config', () => {
+      before(setup({TLS_KEY_SOURCE:'devcert', NODE_ENV:'development'}))
+      it('supports env var "TLS_KEY_SOURCE"', async () => {
+        var response = await chai.request(app).get('/').send()
+        expect(response).to.have.status(404)
+      })
+      after(cleanup)
+    })
+    describe('wrong environment config', () => {
+      it('throws an error, if not in development mode', () => {
+        expect(() => setup({TLS_KEY_SOURCE:'devcert', NODE_ENV:'production'})()).to.throw(Error)
+      })
+      after(() => process.env = {...env})
+    })
+  })
+  describe('HTTP (no TLS) mode', () => {
+    before(setup({HTTP:'true', NODE_ENV:'production'}))
+    it('does serve insecure, unecripted http payload, if env var HTTP is "true"', () => {
+      it('serves 404', async () => {
+        var response = await chai.request(app).get('/').send()
+        expect(response).to.have.status(404)
+      })
+    })
+    after(cleanup)
+  })
+  describe('overload protection by "toobusy-js"', () => {
+    before(setup({NODE_ENV:'production', TOOBUSY_ENABLED:'true', HTTP:'true'}))
+    it('enables overload protection, if env var TOOBUSY_ENABLED is "true"', async () => {
+      var response = await chai.request(app).get('/').send()
+      expect(response).to.have.status(404)
+    })
+    after(cleanup)
+  })
 })
