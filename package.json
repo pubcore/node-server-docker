@@ -4,7 +4,6 @@
   "description": "express based http server",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npx npm-force-resolutions",
     "test": "mocha",
     "coverage": "nyc npm run test",
     "build": "docker-compose build",
