@@ -26,8 +26,10 @@ Rate limit values, see https://www.npmjs.com/package/express-rate-limit
 Path to the place where the TLS (SSL) key files for used domain are located.
 Required files: ssl-key, ssl-cert, ssl-dhparam
 * TLS_KEY_SOURCE (FILES)
-If set to "devcert", corresponding npm package is used to auto-generate a
-selfsigned certificated. Only in development mode possible (NODE_ENV == "development")
+If set to "devcert" and corresponding npm package is installed, it is used to
+auto-generate a selfsigned certificate for localhost. Only in development mode
+possible (NODE_ENV == "development").
+
 * TOOBUSY_ENABLED (0), TOOBUSY_MAX_LAT (300), TOOBUSY_INTERVALL (1500)
 https://www.npmjs.com/package/toobusy-js
 * HTTP (false) If set to "true" TLS is disabled (not recommended)
