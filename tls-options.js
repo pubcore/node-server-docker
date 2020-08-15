@@ -3,7 +3,7 @@ const fs = require('fs'),
 	{readFileSync} = fs,
 	{spawnSync} = require('child_process'),
 	runBin = bin => {
-			var result = spawnSync('node', [`bin/${bin}`], {encoding:'utf8', timeout:60000}),
+			var result = spawnSync('node', [`bin/${bin}`], {encoding:'utf8', timeout:60000, cwd:__dirname}),
 			{status, stdout} = result
 		if(status !== 0){
 			throw Error(result)
