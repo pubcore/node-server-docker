@@ -1,4 +1,4 @@
-## Package to create an Node.js web server based on express and docker
+## Package to create an Node.js web server based on express
 The package's purpose is to offer a foundation for express based web apps,
 with general, none functional behaviour regarding security, logging and
 performance beeing integrated.
