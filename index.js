@@ -42,5 +42,6 @@ app.enable('trust proxy')
 app.use(rateLimiter)
 app.use(helmet())
 app.use(compression())
+app.head('/healthcheck', (req, res) => res.send(''))
 var server = require('./server')(env, app)
 module.exports = {express, app, server}

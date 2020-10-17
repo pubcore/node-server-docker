@@ -33,3 +33,4 @@ possible (NODE_ENV == "development").
 * TOOBUSY_ENABLED (0), TOOBUSY_MAX_LAT (300), TOOBUSY_INTERVALL (1500)
 https://www.npmjs.com/package/toobusy-js
 * HTTP (false) If set to "true" TLS is disabled (not recommended)
+* health check via HEAD request to /healthcheck
