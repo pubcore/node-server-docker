@@ -20,7 +20,7 @@ app.use((req, res) => res.send('Hello world!'))
 Application's ports
 * NODE_ENV (production)
 Type of environment, either 'development' or 'production'
-* RATE_WIN (3000), RATE_MAX (300), RATE_DELAY (0)
+* RATE_WIN (3000), RATE_MAX (300)
 Rate limit values, see https://www.npmjs.com/package/express-rate-limit
 * TLS_KEY_DIR (/run/secrets)
 Path to the place where the TLS (SSL) key files for used domain are located.

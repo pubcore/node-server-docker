@@ -3,20 +3,19 @@ const express = require('express'), //dev: http server
 	helmet = require('helmet'), //security: HTTP headers
 	morgan = require('morgan'), //ops: accesss logs
 	compression = require('compression'), //performance: response compression,
-	RateLimit = require('express-rate-limit') //security: DOS and brute force protection
+	rateLimit = require('express-rate-limit') //security: DOS and brute force protection
 
 var {env} = process,
-	{NODE_ENV, RATE_WIN, RATE_MAX, RATE_DELAY, TOOBUSY_ENABLED, TOOBUSY_MAX_LAT,
+	{NODE_ENV, RATE_WIN, RATE_MAX, TOOBUSY_ENABLED, TOOBUSY_MAX_LAT,
 		TOOBUSY_INTERVALL} = env
 
 if(!NODE_ENV) throw new TypeError('undefined NODE_ENV, required to be set either "development" or "production"')
 console.log('node environment is ' + NODE_ENV)
 
 //leverage injections of secrets by bind-mounts or docker-secrets
-const rateLimiter = new RateLimit({
+const rateLimiter = rateLimit({
 		windowMs: RATE_WIN || 5*60*1000, // 5 minutes
-		max: RATE_MAX || 300, // limit each IP to # requests per windowMs
-		delayMs: RATE_DELAY || 0 // disable delaying - full speed until the max limit is reached
+		max: RATE_MAX || 300 // limit each IP to # requests per windowMs
 	})
 
 const app = express()
@@ -40,7 +39,7 @@ app.use(morgan('common', {
 }))
 app.enable('trust proxy')
 app.use(rateLimiter)
-app.use(helmet())
+app.use(helmet({contentSecurityPolicy: false}))//CSP to be done by application
 app.use(compression())
 app.head('/healthcheck', (req, res) => res.send(''))
 var server = require('./server')(env, app)
