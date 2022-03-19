@@ -1,3 +1,7 @@
+## 2.0.0 2022-03-19
+* new headers by helmet: https://github.com/helmetjs/helmet/blob/main/CHANGELOG.md#500---2022-01-02
+* updated dev deps
+
 ## 1.6.0 2021-04-03
 * rateLimit enviromnent variable "RATE_DELAY" is not longer used and ignored
 * X-Permitted-Cross-Domain-Policies: none header added, see [OWASP](https://owasp.org/www-project-secure-headers/#x-permitted-cross-domain-policies)
