@@ -1,3 +1,7 @@
+## 2.1.0 2022-07-01
+* added environment variable to disable access log (by morgan middleware)
+* updated dependencies
+
 ## 2.0.0 2022-03-19
 * new headers by helmet: https://github.com/helmetjs/helmet/blob/main/CHANGELOG.md#500---2022-01-02
 * updated dev deps

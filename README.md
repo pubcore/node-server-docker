@@ -16,21 +16,24 @@ app.use((req, res) => res.send('Hello world!'))
 ```
 
 ### Configuration environment variables with (default) value
-* APP_PORT (0)
+* APP_PORT (0)  
 Application's ports
-* NODE_ENV (production)
+* NODE_ENV (production)  
 Type of environment, either 'development' or 'production'
-* RATE_WIN (3000), RATE_MAX (300)
+* RATE_WIN (3000), RATE_MAX (300)  
 Rate limit values, see https://www.npmjs.com/package/express-rate-limit
-* TLS_KEY_DIR (/run/secrets)
+* TLS_KEY_DIR (/run/secrets)  
 Path to the place where the TLS (SSL) key files for used domain are located.
 Required files: ssl-key, ssl-cert, ssl-dhparam
-* TLS_KEY_SOURCE (FILES)
+* TLS_KEY_SOURCE (FILES)  
 If set to "devcert" and corresponding npm package is installed, it is used to
 auto-generate a selfsigned certificate for localhost. Only in development mode
 possible (NODE_ENV == "development").
-
-* TOOBUSY_ENABLED (0), TOOBUSY_MAX_LAT (300), TOOBUSY_INTERVALL (1500)
+* TOOBUSY_ENABLED (0), TOOBUSY_MAX_LAT (300), TOOBUSY_INTERVALL (1500)  
 https://www.npmjs.com/package/toobusy-js
-* HTTP (false) If set to "true" TLS is disabled (not recommended)
-* health check via HEAD request to /healthcheck
+* HTTP (false)  
+If set to "true" TLS is disabled (not recommended)  
+* ACCESS_LOG_ENABLED (true)  
+If set to "false" access log of requests is disabled.
+
+### Health check via HEAD request to /healthcheck  

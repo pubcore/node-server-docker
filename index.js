@@ -7,7 +7,7 @@ const express = require('express'), //dev: http server
 
 var {env} = process,
 	{NODE_ENV, RATE_WIN, RATE_MAX, TOOBUSY_ENABLED, TOOBUSY_MAX_LAT,
-		TOOBUSY_INTERVALL} = env
+		TOOBUSY_INTERVALL, ACCESS_LOG_ENABLED} = env
 
 if(!NODE_ENV) throw new TypeError('undefined NODE_ENV, required to be set either "development" or "production"')
 console.log('node environment is ' + NODE_ENV)
@@ -31,12 +31,14 @@ if(TOOBUSY_ENABLED === 'true'){
 		}
 	})
 }
-app.use(morgan('common', {
-	skip: (req, res) => res.statusCode < 400, stream: process.stderr
-}))
-app.use(morgan('common', {
-	skip: (req, res) => res.statusCode >= 400, stream: process.stdout
-}))
+if(ACCESS_LOG_ENABLED !== 'false'){
+	app.use(morgan('common', {
+		skip: (req, res) => res.statusCode < 400, stream: process.stderr
+	}))
+	app.use(morgan('common', {
+		skip: (req, res) => res.statusCode >= 400, stream: process.stdout
+	}))
+}
 app.enable('trust proxy')
 app.use(rateLimiter)
 app.use(helmet({contentSecurityPolicy: false}))//CSP to be done by application
