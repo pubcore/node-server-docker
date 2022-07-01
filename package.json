@@ -1,6 +1,6 @@
 {
   "name": "@pubcore/node-server-docker",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "express based http server",
   "main": "index.js",
   "scripts": {
